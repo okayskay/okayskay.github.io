@@ -174,8 +174,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .films__head .muted { max-width: 38ch; }
 .films__list li {
   position: relative;
-  display: grid; grid-template-columns: 48px 1fr auto; align-items: baseline; gap: 16px;
-  padding: 22px 0; border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 18px;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
   transition: padding 0.35s var(--ease), color 0.3s;
 }
 .films__list li:first-child { border-top: 1px solid var(--line); }
@@ -237,7 +237,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .hero__count { grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
   .hero__count span { font-size: 12px; line-height: 1.35; display: block; }
   .posters { grid-template-columns: 1fr; }
-  .films__list li { grid-template-columns: 34px 1fr; }
+  .films__list li { grid-template-columns: 44px 1fr; column-gap: 14px; }
+  .films__thumb { grid-row: span 2; width: 44px; height: 58px; }
   .films__k { grid-column: 2; white-space: normal; }
   .facts div { grid-template-columns: 1fr; gap: 6px; }
   .contact__links { grid-template-columns: 1fr; }
@@ -259,3 +260,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .about__photo:hover img { transform: scale(1.025); }
 .about__text { margin-bottom: 40px; }
 @media (max-width: 960px) { .about__grid { grid-template-columns: 1fr; } .about__photo { max-width: 520px; } }
+
+.films__thumb {
+  width: 52px; height: 68px; border-radius: 6px; overflow: hidden; background: #1c1c1f;
+  box-shadow: inset 0 0 0 1px var(--line); display: grid; place-items: center;
+  transition: transform 0.35s var(--ease);
+}
+.films__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.films__thumb--empty { font: 500 13px/1 var(--body); color: var(--muted); }
+.films__list li:hover .films__thumb { transform: scale(1.06); }
+.films__preview {
+  position: fixed; left: 0; top: 0; z-index: 40; pointer-events: none;
+  width: 240px; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--line);
+  opacity: 0; transform: translate3d(var(--x, 0), var(--y, 0), 0) scale(0.92);
+  transition: opacity 0.25s, transform 0.12s linear;
+}
+.films__preview img { display: block; width: 100%; height: auto; }
+.films__preview.is-on { opacity: 1; transform: translate3d(var(--x, 0), var(--y, 0), 0) scale(1); }
+@media (hover: none), (max-width: 960px) { .films__preview { display: none; } }

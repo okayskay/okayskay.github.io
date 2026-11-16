@@ -4,3 +4,6 @@ dist/
 .playwright-cli/
 *.log
 .DS_Store
+
+# исходники из WhatsApp
+WhatsApp Image*
