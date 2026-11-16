@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мухамедбек Окаев — режиссёр и второй режиссёр</title>
+  <meta name="description" content="Мухамедбек Окаев — режиссёр сериалов «Жат бауыр-2» и «Көршінің қызы», второй режиссёр казахстанского кино и сериалов с 2017 года." />
+  <meta property="og:title" content="Мухамедбек Окаев — режиссёр" />
+  <meta property="og:description" content="Режиссёр и второй режиссёр. Сериалы и кино Казахстана с 2017 года." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0b0b0c" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0b0c'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='700' font-size='30' fill='%23e9a23b' text-anchor='middle'%3EMO%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">К содержанию</a>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav__row">
+      <a class="nav__mark" href="#top" aria-label="На главную">
+        <span class="nav__badge">МО</span>
+        <span class="nav__name">Мухамедбек Окаев</span>
+      </a>
+      <nav aria-label="Разделы">
+        <ul class="nav__links">
+          <li><a href="#director">Режиссура</a></li>
+          <li><a href="#films">Фильмография</a></li>
+          <li><a href="#about">Обо мне</a></li>
+          <li><a class="btn btn--small" href="#contact">Связаться</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- 1. Hero: имя + 3D-сцена (плёнка в луче проектора) -->
+    <section class="hero" id="top">
+      <canvas class="hero__canvas" id="scene" aria-hidden="true"></canvas>
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="wrap hero__inner">
+        <p class="eyebrow" data-enter="1">Режиссёр · Второй режиссёр</p>
+        <h1 class="hero__title" data-enter="2">
+          <span>Мухамедбек</span>
+          <span>Окаев</span>
+        </h1>
+        <p class="hero__lead" data-enter="3">
+          Снимаю казахстанские сериалы и кино. Режиссёр «Жат бауыр-2» и «Көршінің қызы»,
+          второй режиссёр на площадке с 2017 года.
+        </p>
+        <div class="hero__actions" data-enter="4">
+          <a class="btn" href="#films">Смотреть проекты</a>
+          <a class="btn btn--ghost" href="#contact">Обсудить проект</a>
+        </div>
+      </div>
+      <div class="hero__count wrap" data-enter="5" aria-label="Коротко в цифрах">
+        <div><b>13</b><span>проектов в&nbsp;фильмографии</span></div>
+        <div><b>2</b><span>сериала как режиссёр</span></div>
+        <div><b>2017</b><span>второй режиссёр с этого года</span></div>
+      </div>
+    </section>
+
+    <!-- 2. Режиссура -->
+    <section class="section" id="director">
+      <div class="wrap">
+        <div class="section__head">
+          <p class="eyebrow">Режиссура</p>
+          <h2>Сериалы, которые я&nbsp;снял как режиссёр</h2>
+        </div>
+        <div class="posters">
+          <!-- Постер: положите файл в public/posters/zhat-bauyr-2.jpg и пропишите его в data-poster -->
+          <article class="poster" data-poster="" style="--hue: 18">
+            <div class="poster__art">
+              <span class="poster__year">2023</span>
+              <span class="poster__title">Жат бауыр&nbsp;2</span>
+            </div>
+            <div class="poster__meta">
+              <h3>«Жат бауыр-2»</h3>
+              <p>Телевизионный сериал · режиссёр</p>
+            </div>
+          </article>
+          <!-- Постер: public/posters/korshinin-kyzy.jpg -->
+          <article class="poster" data-poster="" style="--hue: 200">
+            <div class="poster__art">
+              <span class="poster__year">2024</span>
+              <span class="poster__title">Көршінің қызы</span>
+            </div>
+            <div class="poster__meta">
+              <h3>«Көршінің қызы»</h3>
+              <p>Телевизионный сериал · режиссёр</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Фильмография второго режиссёра -->
+    <section class="section section--alt" id="films">
+      <div class="wrap films">
+        <div class="section__head films__head">
+          <p class="eyebrow">Второй режиссёр · с 2017</p>
+          <h2>Фильмография второго режиссёра</h2>
+          <p class="muted">Организую съёмочный день: план съёмок, массовка, тайминг площадки,
+            чтобы режиссёр и группа работали над кадром, а не над хаосом.</p>
+        </div>
+        <ol class="films__list">
+          <li><span class="films__n">01</span><span class="films__t">Ауылдастар</span><span class="films__k">Сериал · 3 сезон</span></li>
+          <li><span class="films__n">02</span><span class="films__t">Адасқан</span><span class="films__k">Сериал</span></li>
+          <li><span class="films__n">03</span><span class="films__t">Қарапайым Қайрат</span><span class="films__k">Сериал · 2 сезон</span></li>
+          <li><span class="films__n">04</span><span class="films__t">Келінжан</span><span class="films__k">Сериал · 3 сезон</span></li>
+          <li><span class="films__n">05</span><span class="films__t">Бөрі</span><span class="films__k">Сериал</span></li>
+          <li><span class="films__n">06</span><span class="films__t">Кесу</span><span class="films__k">Фильм</span></li>
+          <li><span class="films__n">07</span><span class="films__t">Ғашықпын саған</span><span class="films__k">Фильм</span></li>
+          <li><span class="films__n">08</span><span class="films__t">Казахи против пришельцев</span><span class="films__k">Фильм</span></li>
+          <li><span class="films__n">09</span><span class="films__t">Любой проблема шешеміз</span><span class="films__k">Фильм · ЛПШ</span></li>
+          <li><span class="films__n">10</span><span class="films__t">Әкім әйел</span><span class="films__k">Фильм</span></li>
+          <li><span class="films__n">11</span><span class="films__t">Жар-Жар</span><span class="films__k">Фильм</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. Обо мне -->
+    <section class="section" id="about">
+      <div class="wrap about">
+        <div class="section__head">
+          <p class="eyebrow">Обо мне</p>
+          <h2>Режиссёр, который знает площадку изнутри</h2>
+        </div>
+        <div class="about__grid">
+          <p class="about__text">
+            С 2017 года я второй режиссёр на сериалах и фильмах, а значит знаю, что кино делается
+            в&nbsp;подготовке. Поэтому на&nbsp;«Жат бауыр-2» и&nbsp;«Көршінің қызы»
+            группа получила режиссёра, который думает и&nbsp;о&nbsp;сцене, и&nbsp;о&nbsp;съёмочном дне.
+          </p>
+          <dl class="facts">
+            <div>
+              <dt>Образование</dt>
+              <dd>Казахская национальная академия искусств им.&nbsp;Т.&nbsp;Жургенова, 2010–2015</dd>
+            </div>
+            <div>
+              <dt>Специальность</dt>
+              <dd>Режиссёр кино и телевидения</dd>
+            </div>
+            <div>
+              <dt>Режиссура</dt>
+              <dd>«Жат бауыр-2» (2023), «Көршінің қызы» (2024)</dd>
+            </div>
+            <div>
+              <dt>Второй режиссёр</dt>
+              <dd>11 сериалов и фильмов с 2017 года</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Контакты -->
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <p class="eyebrow">Контакты</p>
+        <h2 class="contact__title">Есть сценарий или&nbsp;съёмки на&nbsp;носу?</h2>
+        <p class="contact__lead">Напишите и расскажите о проекте: жанр, сроки, где снимаем.</p>
+        <!-- КОНТАКТЫ: замените ссылки на настоящие -->
+        <ul class="contact__links">
+          <li><a class="contact__link" href="#" data-todo>Telegram <span aria-hidden="true">↗</span></a></li>
+          <li><a class="contact__link" href="#" data-todo>WhatsApp <span aria-hidden="true">↗</span></a></li>
+          <li><a class="contact__link" href="#" data-todo>Instagram <span aria-hidden="true">↗</span></a></li>
+          <li><a class="contact__link" href="#" data-todo>Почта <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__row">
+      <span>© <span id="year"></span> Мухамедбек Окаев</span>
+      <a href="#top">Наверх ↑</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
