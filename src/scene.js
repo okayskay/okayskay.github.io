@@ -1,17 +1,30 @@
 import * as THREE from "three";
 
-// Кадры на плёнке — проекты из фильмографии
+// Кадры на плёнке — постеры проектов (URL через Vite, чтобы попали в сборку)
 const FRAMES = [
-  "Жат бауыр 2", "Көршінің қызы", "Ауылдастар", "Адасқан", "Келінжан",
-  "Бөрі", "Кесу", "Ғашықпын саған", "Әкім әйел", "Жар-Жар",
+  ["Жат бауыр-2", new URL("./img/zhat-bauyr-2.jpg", import.meta.url).href],
+  ["Көршінің қызы", new URL("./img/korshinin-kyzy.jpg", import.meta.url).href],
+  ["Кесу", new URL("./img/films/kesu.jpg", import.meta.url).href],
+  ["Ауылдастар", new URL("./img/films/auyldastar.jpg", import.meta.url).href],
+  ["Казахи против пришельцев", new URL("./img/films/kazakhi-vs-aliens.jpg", import.meta.url).href],
+  ["Адасқан", new URL("./img/films/adasqan.jpg", import.meta.url).href],
+  ["Қара таңба", new URL("./img/films/qara-tanba.jpg", import.meta.url).href],
+  ["Ғашықпын саған", new URL("./img/films/gashykpyn-sagan.jpg", import.meta.url).href],
+  ["Келінжан", new URL("./img/films/kelinzhan.jpg", import.meta.url).href],
+  ["Сәке 2", new URL("./img/films/sake-2.jpg", import.meta.url).href],
+  ["Жар-Жар", new URL("./img/films/zhar-zhar.jpg", import.meta.url).href],
 ];
 
 function makeFilmTexture() {
   const frameW = 360, h = 300, holes = 30;
   const c = document.createElement("canvas");
-  c.width = frameW * FRAMES.length;
+  c.width = frameW * FRAMES.length; // 3960 — в пределах 4096 для телефонов
   c.height = h;
   const g = c.getContext("2d");
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  tex.wrapS = THREE.RepeatWrapping;
+  tex.anisotropy = 8;
 
   g.fillStyle = "#151311";
   g.fillRect(0, 0, c.width, h);
@@ -24,30 +37,52 @@ function makeFilmTexture() {
     roundRect(g, x - 9, h - holes - 6, 18, holes - 6, 4);
   }
 
-  FRAMES.forEach((title, i) => {
-    const x = i * frameW + 14, y = holes + 22, w = frameW - 28, fh = h - 2 * (holes + 22);
-    const hue = (i * 47 + 20) % 360;
-    const grad = g.createLinearGradient(x, y, x + w, y + fh);
-    grad.addColorStop(0, `hsl(${hue} 55% 34%)`);
-    grad.addColorStop(1, `hsl(${(hue + 40) % 360} 45% 12%)`);
-    g.fillStyle = grad;
+  // обновляем текстуру пачкой, а не на каждый загруженный постер
+  let pending = null;
+  const flush = () => { clearTimeout(pending); pending = setTimeout(() => { tex.needsUpdate = true; }, 200); };
+
+  const box = (i) => ({ x: i * frameW + 14, y: holes + 22, w: frameW - 28, fh: h - 2 * (holes + 22) });
+
+  function drawLabel(i, title) {
+    const { x, y, w, fh } = box(i);
+    const shade = g.createLinearGradient(0, y + fh * 0.45, 0, y + fh);
+    shade.addColorStop(0, "rgba(10,9,8,0)");
+    shade.addColorStop(1, "rgba(10,9,8,0.85)");
+    g.fillStyle = shade;
     g.fillRect(x, y, w, fh);
-
-    g.fillStyle = "rgba(255,240,220,0.92)";
-    g.font = '800 34px "Inter Tight", Arial, sans-serif';
+    g.fillStyle = "rgba(255,240,220,0.85)";
+    g.font = '700 22px "Inter Tight", Arial, sans-serif';
     g.textBaseline = "bottom";
-    wrapText(g, title.toUpperCase(), x + 20, y + fh - 18, w - 40, 34);
+    wrapText(g, title.toUpperCase(), x + 16, y + fh - 12, w - 32, 24);
+  }
 
-    g.fillStyle = "rgba(255,240,220,0.5)";
-    g.font = "500 15px Inter, Arial, sans-serif";
-    g.textBaseline = "top";
-    g.fillText(String(i + 1).padStart(2, "0"), x + 20, y + 16);
+  FRAMES.forEach(([title, src], i) => {
+    const { x, y, w, fh } = box(i);
+    // заставка, пока постер грузится
+    g.fillStyle = "#24201c";
+    g.fillRect(x, y, w, fh);
+    drawLabel(i, title);
+
+    const img = new Image();
+    img.decoding = "async";
+    img.onload = () => {
+      // cover: заполняем кадр, берём верхнюю часть постера (лица и название)
+      const s = Math.max(w / img.width, fh / img.height);
+      const sw = w / s, sh = fh / s;
+      const sx = (img.width - sw) / 2, sy = Math.min(img.height - sh, (img.height - sh) * 0.3);
+      g.save();
+      g.filter = "saturate(0.65) brightness(0.62) contrast(1.05)";
+      g.drawImage(img, sx, sy, sw, sh, x, y, w, fh);
+      g.restore();
+      // тёплая плёночная тонировка
+      g.fillStyle = "rgba(233,162,59,0.08)";
+      g.fillRect(x, y, w, fh);
+      drawLabel(i, title);
+      flush();
+    };
+    img.src = src;
   });
 
-  const tex = new THREE.CanvasTexture(c);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  tex.wrapS = THREE.RepeatWrapping;
-  tex.anisotropy = 8;
   return tex;
 }
 
@@ -87,7 +122,7 @@ export async function startScene(canvas) {
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   camera.position.set(0, 0, 12);
 
-  try { await document.fonts.load('800 34px "Inter Tight"', "ӨҢҚ"); } catch {}
+  try { await document.fonts.load('700 22px "Inter Tight"', "ӨҢҚ"); } catch {}
 
   // --- Плёнка ---
   const tex = makeFilmTexture();
@@ -228,6 +263,7 @@ export async function startScene(canvas) {
   }
   document.addEventListener("visibilitychange", () => { if (!document.hidden && visible) loop(); });
 
+  canvas.classList.add("is-ready");
   if (reduced) { frame(4); return; }
   loop();
 }

@@ -29,4 +29,6 @@ if (preview && matchMedia("(hover: hover)").matches) {
   }, { passive: true });
 }
 
-startScene(document.getElementById("scene"));
+// 3D-сцену запускаем после появления текста, чтобы анимация имени шла плавно
+const boot = () => startScene(document.getElementById("scene"));
+setTimeout(() => ("requestIdleCallback" in window ? requestIdleCallback(boot, { timeout: 800 }) : boot()), 700);
